@@ -4,6 +4,14 @@
         {
             "type": "lldb",
             "request": "launch",
+            "name": "Trace Instr tests",
+            "program": "${workspaceRoot}/target/debug/deps/trait_impl-326e535bfb41e425",
+            "args": [],
+            "cwd": "${workspaceRoot}"
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
             "name": "Trace Tests",
             "program": "${workspaceRoot}/target/debug/deps/merkle_simple-f3cf4f243547be2d",
             "args": [],

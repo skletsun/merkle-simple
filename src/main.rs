@@ -1,23 +1,3 @@
-/*
-#[derive(Debug)]
-struct Transaction {
-    data: Vec<u8>
-}
-
-impl Transaction {
-    fn new(data: Vec<u8>) -> Self {
-        Transaction {
-            data: data
-        }
-    }
-}
-
-impl Hashable for Transaction {
-     fn get_bytes(&self) -> &[u8] {
-         &self.data
-     }
-}
-*/
 fn main() {
 
   /*  let leaf_left = TreeElement::new_leaf(format!("left node"));

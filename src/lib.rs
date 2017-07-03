@@ -7,7 +7,7 @@ mod treeelement;
 pub use treeelement::TreeElement;
 
 mod utils;
-pub use utils::Hashable;
+pub use utils::{Hashable, Utils};
 
 #[cfg(test)]
 mod tests;
