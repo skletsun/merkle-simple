@@ -1,0 +1,20 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Trace Tests",
+            "program": "${workspaceRoot}/target/debug/deps/merkle_simple-f3cf4f243547be2d",
+            "args": [],
+            "cwd": "${workspaceRoot}"
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Launch",
+            "program": "${workspaceRoot}/target/debug/merkle_simple",
+            "args": [],
+            "cwd": "${workspaceRoot}"
+        }]
+}
