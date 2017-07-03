@@ -20,12 +20,25 @@ fn produce_tree_from_one_elem() {
 #[test]
 fn produce_tree_from_two_elems() {
     let data = vec!["one".to_string(), "two".to_string()];
-    let test_hash = Utils::hash_node_data(data[0].get_bytes(), data[1].get_bytes());
+
+    // construct the expected hash value
+    let hash_left = Utils::hash_leaf_data(data[0].get_bytes());
+    let hash_right = Utils::hash_leaf_data(data[1].get_bytes());
+    let test_hash = Utils::hash_node_data(hash_left.as_slice(), hash_right.as_slice());
 
     let tree = MerkleTree::from_vector(data).unwrap();
 
     assert_eq!(tree.count(), 2);
     assert!(!tree.is_empty());
     assert_eq!(tree.height(), 1);
-    // assert_eq!(tree.root_hash(), test_hash.as_slice());
+    assert_eq!(tree.root_hash(), test_hash.as_slice());
+}
+
+#[test]
+fn handle_empty_array() {
+    let data: Vec<String> = Vec::new();
+
+    let tree = MerkleTree::from_vector(data);
+
+    assert!(tree.is_none());
 }
