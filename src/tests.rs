@@ -46,7 +46,7 @@ fn handle_empty_array() {
 #[test]
 fn check_leaf_hash() {
     let data = format!("test string");
-    let hash = Hasher::hash_leaf_data(data.get_bytes()); 
+    let hash = Hasher::hash_leaf_data(data.get_bytes());
 
     let leaf = TreeElement::new_leaf(data);
 
@@ -57,7 +57,7 @@ fn check_leaf_hash() {
 fn check_nodes_hash() {
     let d1 = format!("first leaf");
     let d2 = format!("second leaf");
-    let h1 = Hasher::hash_leaf_data(d1.get_bytes()); 
+    let h1 = Hasher::hash_leaf_data(d1.get_bytes());
     let h2 = Hasher::hash_leaf_data(d2.get_bytes());
     let h12 = Hasher::hash_node_data(h1.as_slice(), h2.as_slice());
 

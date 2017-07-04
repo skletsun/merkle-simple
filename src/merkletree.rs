@@ -1,10 +1,13 @@
 use std::collections::VecDeque;
-use utils::Hashable;
 use treeelement::TreeElement;
+use utils::Hashable;
 
 #[derive(Debug)]
 /// Holds the reference to the root element and information about tree
-pub struct MerkleTree<T> where T: Hashable {
+pub struct MerkleTree<T>
+where
+    T: Hashable,
+{
     /// The root element
     root: TreeElement<T>,
 
@@ -12,10 +15,13 @@ pub struct MerkleTree<T> where T: Hashable {
     count: usize,
 
     /// The height of the tree
-    height: usize
+    height: usize,
 }
 
-impl <T> MerkleTree<T> where T: Hashable {
+impl<T> MerkleTree<T>
+where
+    T: Hashable,
+{
     /// Total amount of elements in tree
     pub fn count(&self) -> usize {
         self.count
@@ -36,8 +42,11 @@ impl <T> MerkleTree<T> where T: Hashable {
         self.root.hash()
     }
 
-    /// Produces tree from the vector of Hashable 
-    pub fn from_vector(data: Vec<T>) -> Option<Self> where T: Hashable {
+    /// Produces tree from the vector of Hashable
+    pub fn from_vector(data: Vec<T>) -> Option<Self>
+    where
+        T: Hashable,
+    {
         let count = data.len();
 
         match count {
@@ -53,7 +62,8 @@ impl <T> MerkleTree<T> where T: Hashable {
 
                 // build tree without recursion, layer by layer
                 while src.len() > 1 {
-                    let mut new_layer: VecDeque<TreeElement<T>> = VecDeque::with_capacity(src.len()/2);
+                    let mut new_layer: VecDeque<TreeElement<T>> =
+                        VecDeque::with_capacity(src.len() / 2);
 
                     while !src.is_empty() {
                         // check for the case when we have the one element only - it will be the Leaf
@@ -79,13 +89,11 @@ impl <T> MerkleTree<T> where T: Hashable {
                 let root = src.pop_back().unwrap();
 
                 // return the resulting tree
-                Some(
-                    MerkleTree {
-                        root: root,
-                        count: count,
-                        height: height
-                    }
-                )
+                Some(MerkleTree {
+                    root: root,
+                    count: count,
+                    height: height,
+                })
             }
         }
     }

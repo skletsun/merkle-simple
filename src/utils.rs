@@ -7,9 +7,9 @@ pub trait Hashable {
 
 /// Implementation of Hashable for String
 impl Hashable for String {
-     fn get_bytes(&self) -> &[u8] {
-         &self.as_bytes()
-     }
+    fn get_bytes(&self) -> &[u8] {
+        &self.as_bytes()
+    }
 }
 
 /// Helper structure with single purpose to serve hashing of data. The SHA256 algorithm has been chosen for the sake of simplisity.
