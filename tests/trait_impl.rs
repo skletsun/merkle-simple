@@ -1,6 +1,6 @@
 extern crate merkle_simple;
 
-use merkle_simple::{MerkleTree, Hashable, Utils};
+use merkle_simple::{MerkleTree, Hashable, Hasher};
 
 #[derive(Debug, Clone)]
 struct Transaction {
@@ -39,14 +39,14 @@ fn build_tree_for_custom_struct() {
     assert_eq!(tree.height(), 2);
 
     // verify hashes
-    let h1 = Utils::hash_leaf_data(t1.get_bytes());
-    let h2 = Utils::hash_leaf_data(t2.get_bytes());
-    let h3 = Utils::hash_leaf_data(t3.get_bytes());
-    let h4 = Utils::hash_leaf_data(t4.get_bytes());
+    let h1 = Hasher::hash_leaf_data(t1.get_bytes());
+    let h2 = Hasher::hash_leaf_data(t2.get_bytes());
+    let h3 = Hasher::hash_leaf_data(t3.get_bytes());
+    let h4 = Hasher::hash_leaf_data(t4.get_bytes());
 
-    let h12 = Utils::hash_node_data(&h1, &h2);
-    let h34 = Utils::hash_node_data(&h3, &h4);
+    let h12 = Hasher::hash_node_data(&h1, &h2);
+    let h34 = Hasher::hash_node_data(&h3, &h4);
 
-    let root_hash = Utils::hash_node_data(&h12, &h34);
+    let root_hash = Hasher::hash_node_data(&h12, &h34);
     assert_eq!(tree.root_hash(), root_hash.as_slice());
 }

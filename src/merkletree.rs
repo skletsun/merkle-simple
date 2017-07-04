@@ -1,9 +1,9 @@
-// use crypto_hash::{Algorithm, digest};
 use std::collections::VecDeque;
 use utils::Hashable;
 use treeelement::TreeElement;
 
 #[derive(Debug)]
+/// Holds the reference to the root element and information about tree
 pub struct MerkleTree<T> where T: Hashable {
     /// The root element
     root: TreeElement<T>,
@@ -16,23 +16,27 @@ pub struct MerkleTree<T> where T: Hashable {
 }
 
 impl <T> MerkleTree<T> where T: Hashable {
-
+    /// Total amount of elements in tree
     pub fn count(&self) -> usize {
         self.count
     }
 
+    /// Whether the tree empty or not
     pub fn is_empty(&self) -> bool {
         self.count == 0
     }
 
+    /// The height (number of layers) in tree
     pub fn height(&self) -> usize {
         self.height
     }
 
+    /// Reference to the root element in tree
     pub fn root_hash(&self) -> &[u8] {
         self.root.hash()
     }
 
+    /// Produces tree from the vector of Hashable 
     pub fn from_vector(data: Vec<T>) -> Option<Self> where T: Hashable {
         let count = data.len();
 

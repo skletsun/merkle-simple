@@ -1,13 +1,13 @@
 #[cfg(test)]
 
 use merkletree::MerkleTree;
-use utils::Utils;
-use utils::Hashable;
+use treeelement::TreeElement;
+use utils::{Hashable, Hasher};
 
 #[test]
 fn produce_tree_from_one_elem() {
     let data = vec![format!("one")];
-    let test_hash = Utils::hash_leaf_data(data[0].get_bytes());
+    let test_hash = Hasher::hash_leaf_data(data[0].get_bytes());
 
     let tree = MerkleTree::from_vector(data).unwrap();
 
@@ -22,9 +22,9 @@ fn produce_tree_from_two_elems() {
     let data = vec!["one".to_string(), "two".to_string()];
 
     // construct the expected hash value
-    let hash_left = Utils::hash_leaf_data(data[0].get_bytes());
-    let hash_right = Utils::hash_leaf_data(data[1].get_bytes());
-    let test_hash = Utils::hash_node_data(hash_left.as_slice(), hash_right.as_slice());
+    let hash_left = Hasher::hash_leaf_data(data[0].get_bytes());
+    let hash_right = Hasher::hash_leaf_data(data[1].get_bytes());
+    let test_hash = Hasher::hash_node_data(hash_left.as_slice(), hash_right.as_slice());
 
     let tree = MerkleTree::from_vector(data).unwrap();
 
@@ -41,4 +41,14 @@ fn handle_empty_array() {
     let tree = MerkleTree::from_vector(data);
 
     assert!(tree.is_none());
+}
+
+#[test]
+fn check_leaf_hash() {
+    let data = format!("test string");
+    let hash = Hasher::hash_leaf_data(data.get_bytes()); 
+
+    let leaf = TreeElement::new_leaf(data);
+
+    assert_eq!(leaf.hash(), hash.as_slice());
 }
