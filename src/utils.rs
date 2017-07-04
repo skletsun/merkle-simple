@@ -12,7 +12,8 @@ impl Hashable for String {
     }
 }
 
-/// Helper structure with single purpose to serve hashing of data. The SHA256 algorithm has been chosen for the sake of simplisity.
+/// Helper structure with single purpose to serve hashing of data.
+/// The SHA256 algorithm has been chosen for the sake of simplisity.
 pub struct Hasher;
 
 impl Hasher {

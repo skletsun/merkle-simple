@@ -66,9 +66,9 @@ where
                         VecDeque::with_capacity(src.len() / 2);
 
                     while !src.is_empty() {
-                        // check for the case when we have the one element only - it will be the Leaf
+                        // check for a case when we have the one element only - it will be the Leaf
                         if src.len() == 1 {
-                            // It's a leaf - push it to the next turn of processing
+                            // it's a leaf - push it to the next turn of processing
                             new_layer.push_back(src.pop_front().unwrap());
                         } else {
                             // we take two elements and produce the Node

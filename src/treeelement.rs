@@ -1,7 +1,8 @@
 use utils::{Hashable, Hasher};
 
 #[derive(Debug)]
-/// Common type for leafs and internal nodes. In order to store custom struct it should implement the Hashable trait.
+/// Common type for leafs and internal nodes.
+/// In order to store custom struct it should implement the Hashable trait.
 pub enum TreeElement<T>
 where
     T: Hashable,
