@@ -52,3 +52,16 @@ fn check_leaf_hash() {
 
     assert_eq!(leaf.hash(), hash.as_slice());
 }
+
+#[test]
+fn check_nodes_hash() {
+    let d1 = format!("first leaf");
+    let d2 = format!("second leaf");
+    let h1 = Hasher::hash_leaf_data(d1.get_bytes()); 
+    let h2 = Hasher::hash_leaf_data(d2.get_bytes());
+    let h12 = Hasher::hash_node_data(h1.as_slice(), h2.as_slice());
+
+    let node = TreeElement::new_node(TreeElement::new_leaf(d1), TreeElement::new_leaf(d2));
+
+    assert_eq!(node.hash(), h12.as_slice());
+}
