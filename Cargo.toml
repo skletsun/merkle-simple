@@ -2,6 +2,9 @@
 name = "merkle_simple"
 version = "0.1.0"
 authors = ["Sergey Kletsun <Sergey.Kletsun@gmail.com>"]
+license = "MIT/Apache-2.0"
+readme = "README.md"
+description = "Merkle Tree implementation in Rust."
 
 [dependencies]
 crypto-hash = "0.3.0"
