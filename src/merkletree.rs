@@ -1,7 +1,8 @@
+
+use proof::{PathItem, Proof};
 use std::collections::VecDeque;
 use treeelement::TreeElement;
 use utils::{Hashable, Hasher};
-use proof::{PathItem, Proof};
 
 #[derive(Debug)]
 /// Holds the reference to the root element and information about tree
@@ -99,14 +100,21 @@ where
         }
     }
 
-    /// Generates the proof of inclusion 
-    pub fn get_proof(&self, value: T) -> Option<Proof<T>> where T: Hashable {
+    /// Generates the proof of inclusion
+    pub fn get_proof(&self, value: T) -> Option<Proof<T>>
+    where
+        T: Hashable,
+    {
         // calculate hash of data
         let calculated_hash = Hasher::hash_leaf_data(value.get_bytes());
         // and get the value of the root hash
         let root_hash = self.root_hash().to_vec();
 
         // create a path first and feed it to Proof's construtor
-        PathItem::create_path(&self.root, &calculated_hash).map(|path| { Proof::new(value, root_hash, path) })
+        PathItem::create_path(&self.root, &calculated_hash).map(
+            |path| {
+                Proof::new(value, root_hash, path)
+            },
+        )
     }
 }
