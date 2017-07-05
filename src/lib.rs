@@ -23,7 +23,7 @@ mod utils;
 pub use utils::{Hashable, Hasher};
 
 mod proof;
-pub use proof::Proof;
+pub use proof::{PathItem, Proof};
 
 #[cfg(test)]
 mod tests;
