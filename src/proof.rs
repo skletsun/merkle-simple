@@ -38,7 +38,7 @@ impl<T> Proof<T> {
     fn validate_recursive(&self, path_item: &PathItem) -> bool {
         match path_item.sub_item {
             Some(ref child) => {
-                match child.sibling_hash {
+                match path_item.sibling_hash {
                     Some(Position::Left(ref hash)) => {
                         // calculating node hash taking into account that sibling's hash should be
                         // the first parameter of hash_node_data() since it is positioned left

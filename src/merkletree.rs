@@ -1,4 +1,3 @@
-
 use proof::{PathItem, Proof};
 use std::collections::VecDeque;
 use treeelement::TreeElement;
