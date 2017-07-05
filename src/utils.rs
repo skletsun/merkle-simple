@@ -2,6 +2,7 @@ use crypto_hash::{digest, Algorithm};
 
 /// This trait should be implemented by data structures in order to add them to tree
 pub trait Hashable {
+    /// Provides the representation of a data structure as an array of bytes
     fn get_bytes(&self) -> &[u8];
 }
 
@@ -11,9 +12,9 @@ impl Hashable for String {
         &self.as_bytes()
     }
 }
-
 /// Helper structure with single purpose to serve hashing of data.
 /// The SHA256 algorithm has been chosen for the sake of simplisity.
+#[derive(Debug, Clone, Copy)]
 pub struct Hasher;
 
 impl Hasher {

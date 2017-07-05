@@ -9,6 +9,8 @@
         unused_qualifications
 )]
 
+//! Implementation of Merkle Tree in Rust.
+
 extern crate crypto_hash;
 
 mod merkletree;
@@ -19,6 +21,9 @@ pub use treeelement::TreeElement;
 
 mod utils;
 pub use utils::{Hashable, Hasher};
+
+mod proof;
+pub use proof::Proof;
 
 #[cfg(test)]
 mod tests;

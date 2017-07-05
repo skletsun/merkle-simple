@@ -8,10 +8,19 @@ where
     T: Hashable,
 {
     /// Leafs contain data.
-    Leaf { value: T, hash: Vec<u8> },
+    Leaf {
+        /// Value to store withing the tree
+        value: T,
+        /// Hash of the stored value
+        hash: Vec<u8>
+    },
+    /// Represents the internal node that can have children
     Node {
+        /// Reference to the left subtree
         left: Box<TreeElement<T>>,
+        /// Reference to the right subtree
         right: Box<TreeElement<T>>,
+        /// Combined hash of child subtrees
         hash: Vec<u8>,
     },
 }
