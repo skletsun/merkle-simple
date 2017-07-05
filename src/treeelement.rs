@@ -12,7 +12,7 @@ where
         /// Value to store withing the tree
         value: T,
         /// Hash of the stored value
-        hash: Vec<u8>
+        hash: Vec<u8>,
     },
     /// Represents the internal node that can have children
     Node {
