@@ -112,29 +112,22 @@ impl PathItem {
         left: &TreeElement<T>,
         right: &TreeElement<T>,
     ) -> Option<PathItem> {
-        // Recusively go to the left node
-        let item = PathItem::create_path(left, hash_to_find);
-
-        let (path_item, sibl_hash) = match item {
-            Some(item) => {
-                let s_hash_raw = right.hash().clone();
-                let s_hash = Some(Position::Right(s_hash_raw.to_vec()));
-                (item, s_hash)
+    // Recusively go to the left node
+    PathItem::create_path(left, hash_to_find)
+        .map(|item| {
+            (item, Some(Position::Right(right.hash().clone().to_vec())))
+        }).or_else(|| {
+            let child_item = PathItem::create_path(right, hash_to_find);
+            child_item.map(|item| {
+                (item, Some(Position::Left(left.hash().clone().to_vec())))
+            })
+        }).map(|(path_item, sibl_hash)| {
+            // And finally construct the path item
+            PathItem {
+                hash: hash.to_vec(),
+                sibling_hash: sibl_hash,
+                sub_item: Some(Box::new(path_item)),
             }
-            None => {
-                // ... then to the right node
-                let child_item = PathItem::create_path(right, hash_to_find).unwrap();
-                let s_hash_raw = left.hash().clone();
-                let s_hash = Some(Position::Left(s_hash_raw.to_vec()));
-                (child_item, s_hash)
-            }
-        };
-
-        // And finally construct the path item
-        Some(PathItem {
-            hash: hash.to_vec(),
-            sibling_hash: sibl_hash,
-            sub_item: Some(Box::new(path_item)),
         })
     }
 }
