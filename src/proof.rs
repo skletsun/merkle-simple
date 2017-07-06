@@ -112,6 +112,7 @@ impl PathItem {
         left: &TreeElement<T>,
         right: &TreeElement<T>,
     ) -> Option<PathItem> {
+        // Recusively go to the left node
         let item = PathItem::create_path(left, hash_to_find);
 
         let (path_item, sibl_hash) = match item {
@@ -121,6 +122,7 @@ impl PathItem {
                 (item, s_hash)
             }
             None => {
+                // ... then to the right node
                 let child_item = PathItem::create_path(right, hash_to_find).unwrap();
                 let s_hash_raw = left.hash().clone();
                 let s_hash = Some(Position::Left(s_hash_raw.to_vec()));
@@ -128,6 +130,7 @@ impl PathItem {
             }
         };
 
+        // And finally construct the path item
         Some(PathItem {
             hash: hash.to_vec(),
             sibling_hash: sibl_hash,
