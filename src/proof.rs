@@ -3,7 +3,7 @@ use utils::{Hashable, Hasher};
 
 #[derive(Debug)]
 /// Implements verification for inclusion of data into treeEleTreeElement
-pub struct Proof<T> {
+pub struct Proof<T> where T: Hashable {
     /// Value to verify
     value: T,
 
@@ -14,7 +14,7 @@ pub struct Proof<T> {
     path: PathItem,
 }
 
-impl<T> Proof<T> {
+impl<T> Proof<T> where T: Hashable {
     /// Produces new Proof structure
     pub fn new(value: T, root_hash: Vec<u8>, path_item: PathItem) -> Self {
         Proof {
@@ -56,7 +56,7 @@ impl<T> Proof<T> {
                     None => false,
                 }
             }
-            None => path_item.sibling_hash.is_none(),
+            None => path_item.sibling_hash.is_none() && path_item.hash == Hasher::hash_leaf(&self.value),
         }
     }
 }

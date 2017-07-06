@@ -23,6 +23,11 @@ impl Hasher {
         digest(Algorithm::SHA256, data)
     }
 
+    /// Produces hash of Hashable using SHA256
+    pub fn hash_leaf<T: Hashable>(data: &T) -> Vec<u8> {
+        digest(Algorithm::SHA256, data.get_bytes())
+    }
+
     /// Produces hash of two nodes using SHA256
     pub fn hash_node_data(left: &[u8], right: &[u8]) -> Vec<u8> {
         let mut buffer: Vec<u8> = Vec::with_capacity(left.len() + right.len());

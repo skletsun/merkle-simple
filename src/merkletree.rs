@@ -117,3 +117,26 @@ where
         )
     }
 }
+
+#[test]
+fn test_inclusion_malformed_proof() {
+    let data = vec![format!("one"), format!("two"), format!("three"), format!("four")];
+    let tree = MerkleTree::from_vector(data).unwrap();
+
+    let correct_data = format!("four");
+    let wrong_data = format!("five");
+
+    // calculate hash of correct data
+    let calculated_hash = Hasher::hash_leaf_data(correct_data.get_bytes());
+    // and get the value of the root hash
+    let root_hash = tree.root_hash().to_vec();
+
+    // create correct path
+    let path = PathItem::create_path(&tree.root, &calculated_hash).unwrap();
+
+    // and put WRONG value to the Proof
+    let proof = Proof::new(wrong_data, root_hash, path);
+
+    // should be false
+    assert_eq!(proof.validate(tree.root_hash()), false);
+}
